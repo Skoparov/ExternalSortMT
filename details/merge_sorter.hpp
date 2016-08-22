@@ -103,7 +103,7 @@ void merge( const std::string& out_file, size_t files_num, size_t simul_merge, s
 
     // rename last output file
     std::string result_temp_file = common::temp_file_path( folder, 1 );
-    std::rename( out_file_name.c_str(), out_file.c_str() );
+    std::rename( result_temp_file.c_str(), out_file.c_str() );
 }
 
 } //split
