@@ -57,7 +57,7 @@ namespace merge
 {
 
 template< typename T >
-void merge( const std::string& folder, size_t files_num, size_t simul_merge, size_t avail_mem, size_t threads )
+void merge( const std::string& out_file, size_t files_num, size_t simul_merge, size_t avail_mem, size_t threads )
 {
     // calc buffer in bytes
     size_t buffer_size = avail_mem / (  simul_merge * threads );
@@ -76,8 +76,8 @@ void merge( const std::string& folder, size_t files_num, size_t simul_merge, siz
         io_handlers.emplace_back( simul_merge, buffer_size / sizeof(T), io_mutex );
     }
 
+    std::string folder = common::get_folder_from_path( out_file );
     std::list< concurrency::Task > tasks;
-
     concurrency::async async( threads );
 
     // start threads

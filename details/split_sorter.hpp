@@ -31,7 +31,7 @@ namespace split
 {
 
 template< typename T >
-size_t split( const std::string& file_path, size_t avail_mem, size_t threads_num )
+size_t split( const std::string& file_path, const std::string& work_folder, size_t avail_mem, size_t threads_num )
 {
     // calc block size( number of items to read at once )
     size_t block_size = avail_mem / ( threads_num * sizeof( T ) );
@@ -46,8 +46,6 @@ size_t split( const std::string& file_path, size_t avail_mem, size_t threads_num
     reader.open( file_path, block_size);
 
     concurrency::async async( threads_num );
-
-    std::string work_folder = common::get_folder_from_path( file_path );
     std::list< concurrency::Task > tasks;
 
     size_t total_started = 0;

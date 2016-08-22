@@ -8,7 +8,8 @@ namespace external_sort
 {
 
 template< typename T >
-void external_sort( const std::string& file_path,
+void external_sort( const std::string& in_file,
+                    const std::string& out_file,
                     size_t avail_mem,
                     size_t merge_at_once,
                     size_t threads_num = std::thread::hardware_concurrency() - 1 )
@@ -22,15 +23,18 @@ void external_sort( const std::string& file_path,
         throw std::invalid_argument( "Cannot merge less that two files" );
     }
 
+    if( in_file.empty() || out_file.empty()  ){
+        throw std::invalid_argument( "File name should not be empty" );
+    }
+
     if( threads_num == 0 ){
         threads_num = 1;
     }
 
-    std::string work_folder = common::get_folder_from_path( file_path );
-    size_t files_num = split::split< T >( file_path, avail_mem, threads_num );
+    std::string work_folder = common::get_folder_from_path( out_file );
 
-
-    merge::merge< T >( work_folder, files_num, merge_at_once, avail_mem, threads_num );
+    size_t files_num = split::split< T >( in_file, work_folder, avail_mem, threads_num );
+    merge::merge< T >( out_file, files_num, merge_at_once, avail_mem, threads_num );
 }
 
 }// external_sort
