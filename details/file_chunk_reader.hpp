@@ -104,20 +104,20 @@ void file_chunk_reader< T >::open( const std::string& file_path, size_t block_si
     if( file_size % sizeof( T ) )
     {
         throw std::length_error{
-                    file_path + " has size incompatible with the specified type or is corrupted" };
+            file_path + " has size incompatible with the specified type or is corrupted" };
     }
 }
 
 template< class T >
 void file_chunk_reader< T >::close(  )
 {
-   m_in->close();
+    m_in->close();
 }
 
 template< class T >
 const std::vector< T > file_chunk_reader< T >::read( size_t number_of_items )
 {
-    std::vector< T > result;    
+    std::vector< T > result;
 
     if( !m_completed )
     {

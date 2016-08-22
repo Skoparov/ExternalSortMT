@@ -30,8 +30,8 @@ private:
 
 private:
     std::vector< std::thread > m_pool;
-	std::deque< std::function< void() > > m_tasks;
-	bool m_running{ true };
+    std::deque< std::function< void() > > m_tasks;
+    bool m_running{ true };
     std::atomic_size_t m_currently_working{ 0 };
     mutable std::mutex m_sync_mutex;
     mutable std::condition_variable m_cv;

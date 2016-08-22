@@ -101,10 +101,9 @@ void merge( const std::string& out_file, size_t files_num, size_t simul_merge, s
         t.result.get();
     }
 
-    // rename last output file to "sorted"
-    std::string out_file_name = common::temp_file_path( folder, 1 );
-    std::string result_file_name = folder + "sorted";
-    std::rename( out_file_name.c_str(), result_file_name.c_str() );
+    // rename last output file
+    std::string result_temp_file = common::temp_file_path( folder, 1 );
+    std::rename( out_file_name.c_str(), out_file.c_str() );
 }
 
 } //split
