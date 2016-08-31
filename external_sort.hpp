@@ -15,7 +15,7 @@ void external_sort( const std::string& in_file,
                     size_t threads_num = std::thread::hardware_concurrency() - 1 )
 {
     // if avail_mem < memory needed to merge 2 files + output buffer
-    if( !avail_mem || avail_mem < 3 * sizeof( T ) ){
+    if( avail_mem < 3 * sizeof( T ) ){
         throw std::invalid_argument( "Not enough memory to sort" );
     }
 
