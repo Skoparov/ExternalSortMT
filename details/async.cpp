@@ -28,7 +28,7 @@ void async::wait_for_first_vacant() const
     if( m_currently_working == m_pool.size() )
     {
         std::unique_lock< std::mutex > l{ m_sync_mutex };
-        m_done.wait( l, [ this ](){ return m_currently_working < std::thread::hardware_concurrency(); } );
+        m_done.wait( l, [ this ](){ return m_currently_working < m_pool.size(); } );
     }
 }
 
