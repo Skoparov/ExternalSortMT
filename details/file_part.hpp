@@ -10,7 +10,7 @@ namespace external_sort
 namespace merge
 {
 
-// A wrapper around a file being readed during the merge
+// A wrapper around a file being read during the merge
 template< class T >
 class file_part
 {
